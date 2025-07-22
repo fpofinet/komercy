@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    {{ form_row(form.code) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.designation) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.quantity) }}
+    {{ form_row(form.categorie) }}
+    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

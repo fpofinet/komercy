@@ -57,6 +57,7 @@ final class CategorieController extends AbstractController
         $form = $this->createForm(CategorieForm::class, $categorie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $categorie->setUpdatedAt(new \DateTimeImmutable());
             $entityManager->persist($categorie);
             $entityManager->flush();
             return $this->redirectToRoute('app_categorie');
