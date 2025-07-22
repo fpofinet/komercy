@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use PDO;
 use App\Entity\Product;
 use App\Form\ProductForm;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PDO;
+use App\Service\ReferenceGeneratorService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,13 +24,13 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/add', name: 'app_product_add')]
-    public function addCategorie(Request $request,EntityManagerInterface $entityManager): Response
+    public function addCategorie(Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
     {
         $product= new Product();
         $form = $this->createForm(ProductForm::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $product->setReference("REF-PROD");
+            $product->setReference($referenceGenerator->generate());
             $product->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($product);
             $entityManager->flush();

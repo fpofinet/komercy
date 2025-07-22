@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Form\CategorieForm;
 use App\Form\CategorieTypeForm;
 use App\Repository\CategorieRepository;
+use App\Service\ReferenceGeneratorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +24,13 @@ final class CategorieController extends AbstractController
     }
 
     #[Route('/categorie/add', name: 'app_categorie_add')]
-    public function addCategorie(Request $request,EntityManagerInterface $entityManager): Response
+    public function addCategorie(Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
     {
         $categorie= new Categorie();
         $form = $this->createForm(CategorieForm::class, $categorie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorie->setReference("REF");
+            $categorie->setReference($referenceGenerator->generate());
             $categorie->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($categorie);
             $entityManager->flush();
