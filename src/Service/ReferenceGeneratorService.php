@@ -4,7 +4,7 @@ namespace App\Service;
 
 /**
  * Summary of ReferenceGeneratorService
- * Cette class permet de generer des references uniques sous la forme d'un snowflake id.
+ * Cette class permet de generer des references uniques sous la forme de snowflake id.
  * Le constructeur prend en parametre l'id de la machine qui est valeur entre 1 et 1023 et l'epoch 
  * qui a ete racourci ici au 01-01-2020 00:00:00.
  * @author FIKA <pofinet@outlook.com>
@@ -32,7 +32,7 @@ class ReferenceGeneratorService{
      */
     private int $lastTimestamp = -1;
 
-    public function __construct(int $machineId = 1, int $customEpoch = 1577836800000) // 2020-01-01
+    public function __construct(int $machineId = 1, int $customEpoch = 1577836800000)
     {
         if ($machineId < 0 || $machineId > 1023) {
             throw new \InvalidArgumentException('Machine ID must be between 0 and 1023');

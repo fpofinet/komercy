@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use PDO;
 use App\Entity\Product;
 use App\Form\ProductForm;
+use App\Service\FileUploaderService;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\ReferenceGeneratorService;
@@ -24,14 +26,23 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/add', name: 'app_product_add')]
-    public function addCategorie(Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
+    public function addProduct(FileUploaderService $fileUploader, Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
     {
         $product= new Product();
         $form = $this->createForm(ProductForm::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $product->setReference($referenceGenerator->generate());
+            $product->setReference(reference: $referenceGenerator->generate());
             $product->setCreatedAt(new \DateTimeImmutable());
+            $images = $form->get('images')->getData();
+            foreach ($images as $file) {
+                $name = $fileUploader->upload($file);
+                $image = new Image();
+                $image->setFilename($name);
+                $image->setReference($referenceGenerator->generate());
+                $image->setUploadedAt(new \DateTimeImmutable());
+                $product->addImage($image);
+            }
             $entityManager->persist($product);
             $entityManager->flush();
             return $this->redirectToRoute('app_product');

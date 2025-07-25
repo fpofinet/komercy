@@ -8,6 +8,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class ProductForm extends AbstractType
 {
@@ -22,6 +26,26 @@ class ProductForm extends AbstractType
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'code',
+            ])
+              ->add('images', FileType::class, [
+                'label' => 'Choisissez vos images',
+                'mapped' => false,
+                'multiple' => true,
+                'required' => false,
+                'constraints' => [
+                    new All([
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/webp'
+                            ],
+                            'mimeTypesMessage' => 'Format d’image invalide (JPEG, PNG, GIF, WebP uniquement).',
+                        ])
+                    ])
+                ]
             ])
         ;
     }
