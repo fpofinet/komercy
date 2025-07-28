@@ -4,17 +4,92 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}
-        {% endblock %}
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!--TODO refactorise la sidebar-->
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i>TOGGLE</button>
+            <!-- Navbar Search-->
+            <div class="text-white">ADMIN DASH BOARD</div>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-md-0 me-3 me-lg-4 float-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw">user</i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <!--Debut d'un bloc de fonctionnalite-->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Layouts
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                </nav>
+                            </div>
+                            <!--Fin d'un bloc de fonctionnalite-->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4 bg-primary">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate doloremque neque aut dolor nemo! Sequi quo non magni soluta vel repellendus debitis officiis. Cumque necessitatibus nulla dolorem blanditiis delectus error.
+                        Pariatur eum officiis suscipit ab odio earum laboriosam tempore id doloremque dolores, reiciendis commodi ut repudiandae, deserunt qui est at consequatur error ipsam mollitia neque blanditiis nihil nam! Odit, dolorem.
+                        Aspernatur, nemo obcaecati? Aut rem earum officiis in, non qui fugit corporis esse repellendus nesciunt ipsam, voluptates repellat quis voluptatibus soluta iste consequatur nisi quo doloribus neque minima facere? Cumque?
+                        Dolore aperiam nemo repudiandae obcaecati voluptate ex ab provident ducimus? Dolore fuga magni eum exercitationem atque fugiat laboriosam facere id minima, voluptatum eveniet, odio numquam laudantium repudiandae soluta, molestiae consequuntur.
+                        Quibusdam pariatur, assumenda enim voluptate hic illo officiis ab sed in tempore sapiente id voluptatum esse recusandae dolor, nemo consequuntur fugit dolorum autem, exercitationem quo tenetur provident illum laborum. Enim.
+                        Veritatis exercitationem sit nemo sed temporibus, illum reprehenderit omnis saepe expedita soluta dolorum facere similique veniam. Accusamus sit distinctio placeat omnis quasi laborum ut facere culpa, error autem, velit ullam.
+                        Velit repudiandae reprehenderit provident mollitia dignissimos cumque reiciendis quod nulla incidunt! Quos beatae officiis corrupti illum ex a corporis, vitae tempora dolor eligendi odio quam sit in ab cupiditate at!
+                        Repellendus suscipit facilis iusto architecto obcaecati aliquam vel, sed harum quaerat excepturi quasi ducimus, odio corporis placeat commodi, culpa nihil quam quidem dignissimos quo ex blanditiis omnis officiis exercitationem. Consectetur.
+                        Eum dicta ipsam sed officiis ab dolore architecto cupiditate voluptas laborum neque vitae ad sunt, saepe commodi. Aspernatur sapiente dolore neque nostrum, at temporibus numquam ipsum dolores odit architecto dignissimos.
+                        Porro officiis veniam facere ducimus vitae sit molestias, consequatur laudantium placeat eveniet, doloribus maxime, aliquid laboriosam odit atque iure nemo dolores facilis voluptas quia. Ullam at exercitationem consequuntur repudiandae cumque.
+                        Distinctio laborum neque vitae, exercitationem sequi aperiam praesentium dolor quis officiis ratione amet fuga illum provident commodi ducimus tempore aut expedita odio totam nobis dolorum soluta odit. Nisi, soluta voluptatibus.
+                        Modi quo iure totam, accusamus iusto reiciendis aliquid officia exercitationem vitae maiores dicta! Error explicabo atque, unde, excepturi architecto voluptatem, quibusdam omnis magnam nihil quis facilis nam repudiandae placeat consequatur.
+                        Ex iure dignissimos officiis recusandae. Voluptate nostrum placeat ab numquam modi vel, porro nesciunt molestias nemo qui est obcaecati quisquam, corrupti vero. Eum, reiciendis at. Non inventore earum minima sint!
+                        Dolor odit praesentium minus assumenda error illum molestias! Doloribus nesciunt reiciendis id quia temporibus et ipsum. Blanditiis tempore quis minima deleniti expedita excepturi eos velit laboriosam incidunt. Nesciunt, deleniti voluptatibus.
+                        Illo fugit ipsa libero ipsam excepturi dolore provident nam, corporis iusto, iste aperiam eaque aut illum doloremque magni maiores. Similique veniam eligendi quidem quod sapiente, in nobis molestiae dolorum earum!
+                        Alias aspernatur eum porro animi. Odit atque quaerat quia ipsa, vero porro distinctio nemo mollitia similique totam aut tempore, soluta sapiente magni nobis obcaecati ex voluptates. Consequatur similique unde commodi.
+                        Provident velit voluptas quod culpa? Commodi quam aliquid voluptate excepturi exercitationem quibusdam eligendi doloremque, quasi aliquam praesentium! Eius esse repellat aliquid, perferendis voluptate exercitationem pariatur accusantium dolores optio laboriosam accusamus?
+                        Vitae amet a dolor, ad consequuntur autem assumenda possimus, temporibus voluptate eveniet enim tempora excepturi quas cum sequi? Omnis delectus quae officiis nemo repellendus dolore dolor voluptatibus. Id, laudantium itaque!
+                        Magni delectus, natus, numquam odio sunt aut impedit error aperiam incidunt molestiae dicta pariatur. Facere nisi, pariatur consequatur iure expedita autem maiores sed quis provident aut! Sequi provident incidunt odit!
+                        Nam, labore! Enim pariatur beatae, possimus ea consequatur mollitia veritatis ad totam libero laboriosam provident sint minima odio, eum maiores quam voluptatum inventore dolore perspiciatis facere. Reprehenderit veritatis possimus ullam.
+                        Culpa est vitae, nobis alias quo nemo id repellendus assumenda nostrum reprehenderit itaque, quaerat quibusdam labore odit voluptates ipsum blanditiis! Perferendis ad alias dolores sunt sint maiores, ex molestias aut.
+                        Id labore velit accusamus beatae alias quisquam eius blanditiis quibusdam. Sit necessitatibus aut reprehenderit animi corporis asperiores impedit nemo expedita quod, autem officiis delectus quisquam at accusantium in nihil fugiat.
+                        Ratione consequuntur inventore consectetur eaque eius modi nobis aliquam libero sequi tempore minima incidunt iure ea blanditiis at hic nisi, asperiores quae maiores. Alias maiores beatae repellat ea perferendis sit?
+                        Asperiores eveniet cumque quasi magnam quidem, rem expedita ratione enim, autem architecto tenetur, repudiandae praesentium nobis a nisi soluta repellendus culpa ad necessitatibus. Iste alias ipsa rem autem, incidunt suscipit.
+                        Illo fugiat velit unde, accusamus hic aut provident quis eum corporis iure quidem? Dolore quaerat eius, animi nulla maiores vitae voluptatibus nostrum libero corrupti, fugit, voluptate quia accusantium sequi quasi.
+                    </div>
+                </main>
+            </div>
+        </div>
     </body>
 </html>
+ {# <button id="toggleSidebar" class="btn btn-outline-primary">
+                ☰
+            </button> #}
