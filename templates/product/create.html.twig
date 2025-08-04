@@ -3,9 +3,19 @@
 {% block title %}Add product{% endblock %}
 
 {% block body %}
-    <h1>Créer un produit</h1>
-
-    {{ include('product/form.html.twig', {'button_label': 'Créer'}) }}
-
-    <a href="{{ path('app_product') }}" class="btn btn-secondary">Retour à la liste</a>
+<div class="mb-5">
+    <div class="container mt-3">
+        <div class="col-md-6 col-sm-10 mx-auto">
+            <a href="{{ path('product') }}" class="btn btn-secondary btn-sm mb-2">Retour à la liste</a>
+            <div class="card border-0 shadow">
+                <div class="card-header p-0  bg-primary">
+                    <p class="text-center m-0 text-white h4 fw-bold mt-md-3">Créer un produit</p>
+                </div>
+                <div class="card-body">
+                    {{ include('product/form.html.twig', {'button_label': 'Créer'}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

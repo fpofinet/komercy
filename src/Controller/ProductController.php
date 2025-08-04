@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'app_product')]
+    #[Route('/product', name: 'product')]
     public function index(ProductRepository $repo): Response
     {
         return $this->render('product/index.html.twig', [
@@ -25,7 +25,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/add', name: 'app_product_add')]
+    #[Route('/product/add', name: 'add_product')]
     public function addProduct(FileUploaderService $fileUploader, Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
     {
         $product= new Product();
@@ -45,7 +45,7 @@ final class ProductController extends AbstractController
             }
             $entityManager->persist($product);
             $entityManager->flush();
-            return $this->redirectToRoute('app_product');
+            return $this->redirectToRoute('product');
         }
         
         return $this->render('product/create.html.twig', [
@@ -54,7 +54,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'app_product_show')]
+    #[Route('/product/{id}', name: 'show_product')]
     public function showProduct(Product $product): Response
     {
         return $this->render('product/product.html.twig', [
@@ -62,7 +62,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}/update', name: 'app_product_update')]
+    #[Route('/product/{id}/update', name: 'update_product')]
     public function updateProduct(Product $product,Request $request,EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProductForm::class, $product);
@@ -71,7 +71,7 @@ final class ProductController extends AbstractController
             $product->setUpdatedAt(new \DateTimeImmutable());
             $entityManager->persist($product);
             $entityManager->flush();
-            return $this->redirectToRoute('app_product');
+            return $this->redirectToRoute('product');
         }
         
         return $this->render('product/update.html.twig', [
@@ -80,7 +80,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('product/{id}/delete', name: 'app_product_delete')]
+    #[Route('product/{id}/delete', name: 'delete_product')]
     public function delete(Request $request, Product $product, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
@@ -88,7 +88,7 @@ final class ProductController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_product');
+        return $this->redirectToRoute('product');
     }
 }
 
