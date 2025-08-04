@@ -3,38 +3,40 @@
 {% block title %}Liste des categories{% endblock %}
 
 {% block body %}
-    <h1>Liste des categories</h1>
+<div class="container">
+    <p class="text-center h3 fw-bold mt-3">Liste des categories</p>
+    <a href="{{ path('add_categorie') }}" class="btn bg-primary text-white btn-sm mb-3">Creer</a>
+    <div class="table-responsive shadow p-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date de création</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td>{{ categorie.code }}</td>
+                    <td>{{ categorie.description|u.truncate(50) }}</td>
+                    <td>{{ categorie.createdAt|date('d-m-Y H:i') }}</td>
+                    <td>
+                        <a href="{{ path('show_categorie', {'id': categorie.id}) }}" class="btn btn-sm btn-info">Voir</a>
+                        <a href="{{ path('update_categorie', {'id': categorie.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
 
-    <a href="{{ path('app_categorie_add') }}" class="btn btn-primary mb-3">Créer une nouvelle categorie</a>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Date de création</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie in categories %}
-            <tr>
-                <td>{{ categorie.code }}</td>
-                <td>{{ categorie.description|u.truncate(50) }}</td>
-                <td>{{ categorie.createdAt|date('d-m-Y H:i') }}</td>
-                <td>
-                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-sm btn-info">Voir</a>
-                    <a href="{{ path('app_categorie_update', {'id': categorie.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
-
-                    {{ include('categorie/delete.html.twig', {'categorie': categorie}) }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Aucune categorie trouvé.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        {{ include('categorie/delete.html.twig', {'categorie': categorie}) }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune categorie trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
 

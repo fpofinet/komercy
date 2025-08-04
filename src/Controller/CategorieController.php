@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CategorieController extends AbstractController
 {
-    #[Route('/categorie', name: 'app_categorie')]
+    #[Route('/categorie', name: 'categorie')]
     public function index(CategorieRepository $repo): Response
     {
         return $this->render('categorie/index.html.twig', [
@@ -23,7 +23,7 @@ final class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/categorie/add', name: 'app_categorie_add')]
+    #[Route('/categorie/add', name: 'add_categorie')]
     public function addCategorie(Request $request,EntityManagerInterface $entityManager,ReferenceGeneratorService $referenceGenerator): Response
     {
         $categorie= new Categorie();
@@ -34,7 +34,7 @@ final class CategorieController extends AbstractController
             $categorie->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($categorie);
             $entityManager->flush();
-            return $this->redirectToRoute('app_categorie');
+            return $this->redirectToRoute('categorie');
         }
         
         return $this->render('categorie/create.html.twig', [
@@ -44,7 +44,7 @@ final class CategorieController extends AbstractController
     }
 
 
-    #[Route('/categorie/{id}', name: 'app_categorie_show')]
+    #[Route('/categorie/{id}', name: 'show_categorie')]
     public function showCategorie(Categorie $categorie): Response
     {
         return $this->render('categorie/categorie.html.twig', [
@@ -52,7 +52,7 @@ final class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/categorie/{id}/update', name: 'app_categorie_update')]
+    #[Route('/categorie/{id}/update', name: 'update_categorie')]
     public function updateCategorie(Categorie $categorie,Request $request,EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategorieForm::class, $categorie);
@@ -61,7 +61,7 @@ final class CategorieController extends AbstractController
             $categorie->setUpdatedAt(new \DateTimeImmutable());
             $entityManager->persist($categorie);
             $entityManager->flush();
-            return $this->redirectToRoute('app_categorie');
+            return $this->redirectToRoute('categorie');
         }
         
         return $this->render('categorie/update.html.twig', [
@@ -70,7 +70,7 @@ final class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('categorie/{id}/delete', name: 'app_categorie_delete')]
+    #[Route('categorie/{id}/delete', name: 'delete_categorie')]
     public function delete(Request $request, Categorie $categorie, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('_token'))) {
@@ -78,6 +78,6 @@ final class CategorieController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_categorie');
+        return $this->redirectToRoute('categorie');
     }
 }

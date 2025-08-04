@@ -3,9 +3,17 @@
 {% block title %}Add categorie{% endblock %}
 
 {% block body %}
-    <h1>Créer un produit</h1>
-
-    {{ include('categorie/form.html.twig', {'button_label': 'Créer'}) }}
-
-    <a href="{{ path('app_categorie') }}" class="btn btn-secondary">Retour à la liste</a>
+<div class="container">
+    <div class="col-md-6 col-sm-10 col-12 mx-auto mt-3">
+        <a href="{{ path('categorie') }}" class="btn btn-secondary btn-sm mb-2">Retour à la liste</a>
+        <div class="card border-0 shadow">
+            <div class="card-header bg-primary p-0">
+                <p class="text-center h4 text-white m-0">Créer une categorie</p>
+            </div>
+            <div class="card-body">
+                {{ include('categorie/form.html.twig', {'button_label': 'Créer'}) }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -21,8 +21,8 @@
         </tr>
     </table>
 
-    <a href="{{ path('app_categorie_update', {'id': categorie.id}) }}" class="btn btn-warning">Modifier</a>
-    <a href="{{ path('app_categorie') }}" class="btn btn-secondary">Retour</a>
+    <a href="{{ path('update_categorie', {'id': categorie.id}) }}" class="btn btn-warning">Modifier</a>
+    <a href="{{ path('categorie') }}" class="btn btn-secondary">Retour</a>
 
     {{ include('categorie/delete.html.twig', {'categorie': categorie}) }}
 {% endblock %}
