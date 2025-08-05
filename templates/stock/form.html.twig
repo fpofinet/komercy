@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+
+    {{ form_row(form.type) }}
+    {{ form_row(form.comment) }}
+
+    <div class="collection-container" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">
+        {% for product in form.products %}
+            <div class="collection-item">
+                {{ form_widget(product) }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Valider</button>
+
+{{ form_end(form) }}

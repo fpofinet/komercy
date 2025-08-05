@@ -49,9 +49,16 @@ class Product
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product',cascade: ['persist'])]
     private Collection $images;
 
+    /**
+     * @var Collection<int, StockItem>
+     */
+    #[ORM\OneToMany(targetEntity: StockItem::class, mappedBy: 'product')]
+    private Collection $stockItems;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->stockItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,6 +198,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($image->getProduct() === $this) {
                 $image->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockItem>
+     */
+    public function getStockItems(): Collection
+    {
+        return $this->stockItems;
+    }
+
+    public function addStockItem(StockItem $stockItem): static
+    {
+        if (!$this->stockItems->contains($stockItem)) {
+            $this->stockItems->add($stockItem);
+            $stockItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockItem(StockItem $stockItem): static
+    {
+        if ($this->stockItems->removeElement($stockItem)) {
+            // set the owning side to null (unless already changed)
+            if ($stockItem->getProduct() === $this) {
+                $stockItem->setProduct(null);
             }
         }
 
