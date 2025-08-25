@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\StockMovement;
 use App\Form\StockMovementForm;
+use App\Service\StockService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,16 +22,34 @@ final class StockController extends AbstractController
     }
 
     #[Route('/stock/add-product', name: 'add_product_stock')]
-    public function addProduct(Request $request, EntityManagerInterface $em): Response
+    public function addProduct(Request $request, EntityManagerInterface $em,StockService $stockService): Response
     {
         $entree = new StockMovement();
 
         $form = $this->createForm(StockMovementForm::class, $entree);
         if ($form->isSubmitted() && $form->isValid()) {
-            // Ici, $entree contient toutes les lignes (produit + quantité)
-            // Doctrine va persister tout automatiquement si cascade persist est configuré
-
+            $entree->setType("ENTREE");
+            $stockService->createStockMovement($entree);
             $em->persist($entree);
+            $em->flush();
+            return $this->redirectToRoute('stock');
+        }
+        return $this->render('stock/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/stock/withdraw-product', name: 'withdraw_product_stock')]
+    public function withdrawProduct(Request $request, EntityManagerInterface $em,StockService $stockService): Response
+    {
+        $sortie = new StockMovement();
+
+        $form = $this->createForm(StockMovementForm::class, $sortie);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setType("SORTIE");
+            $stockService->createStockMovement($sortie);
+
+            $em->persist($sortie);
             $em->flush();
 
             $this->addFlash('success', 'correct');

@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-    {{ form_row(form.type) }}
+    {# {{ form_row(form.type) }} #}
     {{ form_row(form.comment) }}
 
     <div class="collection-container" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">

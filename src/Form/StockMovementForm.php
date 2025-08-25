@@ -16,22 +16,14 @@ class StockMovementForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type',ChoiceType::class, [
-                'choices' => [
-                    'Entrée' => 'ENTRÉE',
-                    'Sortie' => 'SORTIE',
-                ],
-                'label' => 'Type',
-                'placeholder' => 'Sélectionnez un type',
-            ])
-            ->add('comment',TextType::class,[
-                'label' => 'Commentaire'
-            ])
             ->add('products', CollectionType::class, [
                 'entry_type' => StockItemForm::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+            ])
+            ->add('comment',TextType::class,[
+                'label' => 'Commentaire'
             ]);
             
         ;
